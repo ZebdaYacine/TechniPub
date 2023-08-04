@@ -5,8 +5,8 @@
       <label for="my-drawer-2" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
         <div
-          class="flex flex-row place-items-center justify-start px-1 cursor-pointer hover:bg-slate-200"
-          @click="changeStyleItemSelected()"
+          class="flex flex-row place-items-center justify-start cursor-pointer hover:bg-slate-200"
+          @click="$emit('loadView', 'ProfileView')"
         >
           <div class="avatar online">
             <div class="w-12 rounded-full">
@@ -24,7 +24,8 @@
             :name-item="item.nameItem"
             :icon-item="item.iconItem"
             class="cursor-pointer hover:bg-slate-200"
-            @click="changeStyleItemSelected()"
+            :class="{ 'conditional-style': item.nameItem === 'HomeView' }"
+            @click="$emit('loadView', item.nameView)"
           />
         </div>
       </ul>
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import ItemSideBarComp from "./ItemSideBarComp.vue";
+import ItemSideBarComp from "./itemsidebarcomp.vue";
 export default {
   name: "DashboardComp",
   components: {
@@ -46,24 +47,30 @@ export default {
   data() {
     return {
       items: [
-        { nameItem: "Statistique", iconItem: "fas fa-chart-column fa-2xl" },
-        { nameItem: "Ventes", iconItem: "fas fa-cart-arrow-down fa-2xl" },
-        { nameItem: "Achates", iconItem: "fas fa-bag-shopping fa-2xl" },
+        {
+          nameItem: "Accueil",
+          nameView: "HomeView",
+          iconItem: "fas fa-house-user fa-2xl",
+        },
+        {
+          nameItem: "Ventes",
+          nameView: "SalesView",
+          iconItem: "fas fa-cart-arrow-down fa-2xl",
+        },
+        {
+          nameItem: "Achates",
+          nameView: "PurchasesView",
+          iconItem: "fas fa-bag-shopping fa-2xl",
+        },
       ],
-      lastTargetclicked: "",
     };
   },
-  methods: {
-    changeStyleItemSelected() {
-      if (this.lastTargetclicked != "") {
-        this.lastTargetclicked.style.backgroundColor = "";
-        event.currentTarget.style.backgroundColor = "#CED6DC";
-        this.lastTargetclicked = event.currentTarget;
-      } else {
-        event.currentTarget.style.backgroundColor = "#CED6DC";
-        this.lastTargetclicked = event.currentTarget;
-      }
-    },
-  },
+  emits: ["loadView"],
 };
 </script>
+
+<style>
+.conditional-style {
+  background-color: #ced6dc;
+}
+</style>

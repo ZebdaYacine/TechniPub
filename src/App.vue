@@ -1,15 +1,10 @@
 <template>
-  <div>
-    <MainView />
-  </div>
+  <router-view />
 </template>
 
 <script>
-import MainView from "./views/MainView.vue";
 export default {
   name: "App",
-  components: {
-    MainView,
-  },
+  components: {},
 };
 </script>
