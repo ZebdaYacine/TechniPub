@@ -1,4 +1,6 @@
 import { createStore } from "vuex";
+import VuexPersist from "vuex-persist";
+
 const store = createStore({
   state() {
     return {

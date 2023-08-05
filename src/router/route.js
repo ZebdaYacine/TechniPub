@@ -41,6 +41,7 @@ const router = createRouter({
     },
     {
       path: "/:catchAll(.*)",
+      name: "404",
       component: NotFoundView,
     },
   ],
@@ -52,6 +53,9 @@ router.beforeEach((to) => {
   if (!user.isLogged) {
     if (to.path !== "/" && to.path !== "/login" && to.path !== "/Register") {
       return false;
+    }
+    if ((to.path = "to.path !== " / "")) {
+      return "404";
     }
   } else {
     if (to.path === "/" || to.path === "/Register") {
