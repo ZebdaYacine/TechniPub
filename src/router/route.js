@@ -47,14 +47,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  const isLogged = store.state.user.isLogged;
-  if (!isLogged) {
-    if (to.name !== "Login" && to.name !== "Register") {
-      return "/";
+  const user = store.state.user;
+  console.log(user);
+  if (!user.isLogged) {
+    if (to.path !== "/" && to.path !== "/login" && to.path !== "/Register") {
+      return false;
     }
   } else {
-    if (to.name === "Login" || to.name === "Register") {
-      return "/Main/1?name=zed";
+    if (to.path === "/" || to.path === "/Register") {
+      return false;
     }
   }
 });

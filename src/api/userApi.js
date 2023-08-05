@@ -3,7 +3,7 @@ const userApi = {
     return {
       name: "Zebda Yacine",
       id: 1,
-      isLogged: true,
+      isLogged: false,
       privilage: 111,
     };
   },

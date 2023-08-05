@@ -21,12 +21,13 @@
         </router-link>
       </li>
       <li><router-link to="">Setting </router-link></li>
-      <li><router-link to="/login">Logout </router-link></li>
+      <li><a @click="logoaut()">Logout</a></li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "ProfileListComp",
   // props: {
@@ -35,6 +36,13 @@ export default {
   inject: ["profileSrc"],
   data() {
     return {};
+  },
+  methods: {
+    ...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
+    logoaut() {
+      this.setLoginStatus(false);
+      this.$router.push({ name: "Login" });
+    },
   },
 };
 </script>

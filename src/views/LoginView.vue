@@ -65,16 +65,20 @@ export default {
     ...mapGetters({ userInfo: "getUser" }),
   },
   mounted() {
+    this.setLoginStatus(false);
     console.log(this.userInfo);
   },
   methods: {
     ...mapActions({ setUser: "setUserAction" }),
+    ...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
     login() {
       this.setUser(userApi.getUser());
+      this.setLoginStatus(true);
+      console.log(this.userInfo);
       this.$router.push({
         name: "Main",
-        params: { id: userInfo.id },
-        query: { name: userInfo.id.name },
+        params: { id: this.userInfo.id },
+        query: { name: this.userInfo.name },
       });
     },
   },
