@@ -16,13 +16,12 @@
       class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
     >
       <li>
-        <a class="justify-between">
-          Profile
-          <span class="badge">New</span>
-        </a>
+        <router-link to="" class="justify-between"
+          >Profile <span class="badge">New</span>
+        </router-link>
       </li>
-      <li><a>Settings</a></li>
-      <li><a>Logout</a></li>
+      <li><router-link to="">Setting </router-link></li>
+      <li><router-link to="/login">Logout </router-link></li>
     </ul>
   </div>
 </template>

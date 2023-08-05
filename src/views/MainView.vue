@@ -43,7 +43,7 @@ export default {
     return {
       profilsrc: profil,
       user: {
-        name: "Zebda Yacine",
+        name: this.$route.query.name,
       },
       lastTargetclicked: "",
       view: "",

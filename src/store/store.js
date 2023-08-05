@@ -1,0 +1,36 @@
+import { createStore } from "vuex";
+const store = createStore({
+  state() {
+    return {
+      user: {
+        name: "",
+        id: "",
+        isLogged: true,
+        privilage: "",
+      },
+    };
+  },
+  mutations: {
+    changeLoginStatus(state, payload) {
+      state.user.isLogged = payload;
+    },
+    setUser(state, payload) {
+      state.user = payload;
+    },
+  },
+  actions: {
+    changeLoginStatusAction(context, payload) {
+      context.commit("changeLoginStatus", payload);
+    },
+    setUserAction(context, payload) {
+      context.commit("setUser", payload);
+    },
+  },
+  getters: {
+    getUser(state) {
+      return state.user;
+    },
+  },
+});
+
+export default store;
