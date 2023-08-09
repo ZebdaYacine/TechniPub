@@ -5,26 +5,24 @@
         <div class="card w-4/5 bg-slate-200 shadow-xl">
           <div class="card-body">
             <div class="card-title">Cree votre compt</div>
-            <form class="space-y-3 md:space-y-5">
-              <input
+            <form class="space-y-3 md:space-y-5" @submit.prevent="register()">
+              <BaseInpute
                 type="text"
                 placeholder="Email or Phone"
-                class="input input-bordered w-full"
+                v-model="userForm.name"
               />
-              <input
-                type="text"
+              <BaseInpute
+                type="password"
                 placeholder="Password"
-                class="input input-bordered w-full"
+                v-model="userForm.password"
               />
-              <input
-                type="text"
+              <BaseInpute
+                type="password"
                 placeholder="Confirm Password"
-                class="input input-bordered w-full"
+                v-model="userForm.ConfirmPassword"
               />
               <div class="flex flex-row">
-                <button class="btn btn-success" @click.prevent="register()">
-                  Cree
-                </button>
+                <button class="btn btn-success">Cree</button>
                 <p class="flex justify-end btn btn-link">
                   <router-link to="/Login"> Login </router-link>
                 </p>
@@ -38,18 +36,25 @@
 </template>
 
 <script>
+import UserStore from "../firebase/userStore";
+import BaseInpute from "../components/BaseInpute.vue";
 export default {
   name: "RegisterView",
+  components: {
+    BaseInpute,
+  },
   data() {
     return {
-      user: {
-        name: "Zebda Yacine",
+      userForm: {
+        name: "",
+        password: "",
+        ConfirmPassword: "",
       },
     };
   },
   methods: {
     register() {
-      this.$router.push({ name: "Main" });
+      console.log(UserStore.createUser(this.userForm));
     },
     backToLogin() {
       this.$router.push({ name: "Login" });

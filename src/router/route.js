@@ -47,19 +47,28 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to) => {
+router.beforeEach((from, next) => {
   const user = store.state.user;
-  console.log(user);
+  console.log(from.path);
   if (!user.isLogged) {
-    if (to.path !== "/" && to.path !== "/login" && to.path !== "/Register") {
-      return false;
-    }
-    if ((to.path = "to.path !== " / "")) {
-      return "404";
+    console.log(0);
+    if (
+      from.path !== "/" &&
+      from.path !== "/login" &&
+      from.path !== "/Register"
+    ) {
+      console.log(1);
+      return "/";
     }
   } else {
-    if (to.path === "/" || to.path === "/Register") {
-      return false;
+    console.log(2);
+    if (
+      from.path === "/" ||
+      from.path === "/login" ||
+      from.path === "/Register"
+    ) {
+      console.log(3);
+      return "/Main/" + user.id + "?name=" + user.name;
     }
   }
 });

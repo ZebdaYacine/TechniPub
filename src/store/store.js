@@ -7,7 +7,7 @@ const store = createStore({
       user: {
         name: "",
         id: "",
-        isLogged: "",
+        isLogged: false,
         privilage: "",
       },
     };

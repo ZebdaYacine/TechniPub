@@ -25,6 +25,7 @@ import HomeView from "./HomeView.vue";
 import SalesView from "./SalesView.vue";
 import PurchasesView from "./PurchasesView.vue";
 import ProfileView from "./ProfileView.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "MainView",
@@ -43,14 +44,19 @@ export default {
     return {
       profilsrc: profil,
       user: {
-        name: this.$route.query.name,
+        name: "",
       },
       lastTargetclicked: "",
       view: "",
     };
   },
+  computed: {
+    ...mapGetters({ userInfo: "getUser" }),
+  },
   mounted() {
     this.view = "HomeView";
+    console.log(this.userInfo);
+    this.user.name = this.userInfo.name;
   },
   methods: {
     loadCurrentView(data) {
