@@ -5,7 +5,7 @@ import PurchasesView from "../views/PurchasesView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import store from "../store/store";
+import store from "../store";
 
 const router = createRouter({
   history: createWebHistory(),

@@ -4,18 +4,28 @@
       <div class="grid gap-4 place-items-center h-56 py-5">
         <div class="card w-4/5 bg-slate-200 shadow-xl">
           <div class="card-body">
-            <div class="card-title">Cree votre compt</div>
+            <div class="card-title">
+              <p class="text-center mx-3">Cree votre compt</p>
+            </div>
             <form class="space-y-3 md:space-y-5" @submit.prevent="register()">
-              <BaseInpute
+              <BaseInpute1
                 type="text"
-                placeholder="Email or Phone"
+                placeholder="Email@gmail.com"
                 v-model="userForm.name"
+                relus="email"
               />
-              <BaseInpute
+              <BaseInpute1
+                type="text"
+                placeholder="0658185867"
+                v-model="userForm.name"
+                relus="phone"
+              />
+              <!-- <BaseInpute1
                 type="password"
-                placeholder="Password"
+                placeholder="}+$~&@><"
                 v-model="userForm.password"
-              />
+                rules="password"
+              /> -->
               <BaseInpute
                 type="password"
                 placeholder="Confirm Password"
@@ -38,13 +48,18 @@
 <script>
 import UserStore from "../firebase/userStore";
 import BaseInpute from "../components/BaseInpute.vue";
+import BaseInpute1 from "../testComponents/BaseInpute1.vue";
+
 export default {
   name: "RegisterView",
   components: {
     BaseInpute,
+    BaseInpute1,
   },
+
   data() {
     return {
+      name: "",
       userForm: {
         name: "",
         password: "",
