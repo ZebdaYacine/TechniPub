@@ -7,11 +7,11 @@ const Validators = {
   isPassWordValide(value, name) {
     const Error = Validators.ErrorMessage.get(name);
     if (value.length > 8) {
-      const pattern = /[A-Z]/;
+      let pattern = /[A-Z]/;
       if (pattern.test(value)) {
         pattern = /[!@#$%^&*(),.?":{}|<>]/;
         if (pattern.test(value)) {
-          return "";
+          return true;
         }
         return Error.SpecialChar;
       }
@@ -63,17 +63,30 @@ const Validators = {
         },
       },
     ],
+    [
+      "passwordC",
+      {
+        counter: 8,
+        check(value) {
+          return Validators.isInputValid(
+            value,
+            Validators.isPassWordValide,
+            "password"
+          );
+        },
+      },
+    ],
   ]),
   ErrorMessage: new Map([
     ["email", { msg: "Email Invalide" }],
     ["phone", { msg: "Phone Invalide" }],
     [
       "password",
-      [
-        { lessThan8: "password less than 8 Letter" },
-        { UpperCase: "password must Contains Upper Case" },
-        { SpecialChar: "password must Contains Special Letter @+$*..." },
-      ],
+      {
+        lessThan8: "password less than 8 Letter",
+        UpperCase: "password must Contains Upper Case",
+        SpecialChar: "password must Contains Special Letter @+$*...",
+      },
     ],
   ]),
 };

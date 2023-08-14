@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import VuexPersist from "vuex-persist";
 
 const store = createStore({
   state() {
@@ -10,6 +9,7 @@ const store = createStore({
         isLogged: false,
         privilage: "",
       },
+      password: "",
     };
   },
   mutations: {
@@ -18,6 +18,9 @@ const store = createStore({
     },
     setUser(state, payload) {
       state.user = payload;
+    },
+    setPassword(state, payload) {
+      state.password = payload;
     },
   },
   actions: {
@@ -31,6 +34,9 @@ const store = createStore({
   getters: {
     getUser(state) {
       return state.user;
+    },
+    getPassword(state) {
+      return state.password;
     },
   },
 });
