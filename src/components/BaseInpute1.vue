@@ -81,7 +81,14 @@ export default {
       }
     },
   },
-
+  mounted() {
+    if (
+      window.performance.navigation.type ===
+      window.performance.navigation.TYPE_RELOAD
+    ) {
+      this.$store.commit("setPassword", "");
+    }
+  },
   computed: {
     validateInput() {
       const data = this.modelValue;

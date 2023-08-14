@@ -15,13 +15,13 @@
               <BaseInpute1
                 type="password"
                 placeholder="aAk$l@&+><.."
-                v-model="userForm.password.Initialpassword"
+                v-model="userForm.Initialpassword"
                 relus="password"
               />
               <BaseInpute1
                 type="password"
                 placeholder="Like the last password"
-                v-model="userForm.password.ConfirmPassword"
+                v-model="userForm.ConfirmPassword"
                 relus="passwordC"
               />
               <div class="flex flex-row">
@@ -42,7 +42,7 @@
 
 <script>
 import UserStore from "../firebase/userStore";
-import BaseInpute1 from "../testComponents/BaseInpute1.vue";
+import BaseInpute1 from "../components/BaseInpute1.vue";
 
 export default {
   name: "RegisterView",
@@ -53,7 +53,8 @@ export default {
     return {
       userForm: {
         name: "",
-        password: { Initialpassword: "", ConfirmPassword: "" },
+        Initialpassword: "",
+        ConfirmPassword: "",
       },
     };
   },

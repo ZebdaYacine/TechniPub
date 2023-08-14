@@ -21,7 +21,7 @@ const Validators = {
   },
 
   isInputValid(value, checkInput, name) {
-    return value.length === 0 ? "Empty Input" : checkInput(value, name);
+    return value === "" ? "Empty Input" : checkInput(value, name);
   },
   target: new Map([
     [
