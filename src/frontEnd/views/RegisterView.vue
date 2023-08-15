@@ -6,19 +6,19 @@
           <div class="card-body">
             <div class="card-title">Cree votre compt</div>
             <form class="space-y-3 md:space-y-5">
-              <BaseInpute1
+              <BaseInpute
                 type="text"
                 placeholder="06 58 18 58 67"
                 v-model="userForm.name"
                 relus="phone"
               />
-              <BaseInpute1
+              <BaseInpute
                 type="password"
                 placeholder="aAk$l@&+><.."
                 v-model="userForm.Initialpassword"
                 relus="password"
               />
-              <BaseInpute1
+              <BaseInpute
                 type="password"
                 placeholder="Like the last password"
                 v-model="userForm.ConfirmPassword"
@@ -42,12 +42,12 @@
 
 <script>
 import UserStore from "../firebase/userStore";
-import BaseInpute1 from "../components/BaseInpute1.vue";
+import BaseInpute from "../components/BaseInpute.vue";
 
 export default {
   name: "RegisterView",
   components: {
-    BaseInpute1,
+    BaseInpute,
   },
   data() {
     return {

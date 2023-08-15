@@ -3,7 +3,7 @@ import App from "./App.vue";
 import "./style/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import router from "./router/route";
-import store from "./store";
+import store from "./store/index";
 
 store.watch(
   (state) => state, // Watch the entire state

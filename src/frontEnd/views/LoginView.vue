@@ -3,7 +3,7 @@
     <div
       class="lg:flex lg:flex-row w-full md:flex md:flex-col justify-center items-center"
     >
-      <div class="basis-1/2">
+      <div class="basis-1/2 w-full">
         <div class="grid gap-4 place-items-center h-full py-3">
           <div class="avatar">
             <div class="w-30 rounded-full ring-offset-2">
@@ -17,21 +17,21 @@
           </div>
         </div>
       </div>
-      <div class="basis-1/2">
+      <div class="basis-1/2 w-full">
         <div class="grid gap-4 place-items-center h-56 py-5">
-          <div class="card w-4/5 bg-slate-200 shadow-xl">
+          <div class="card bg-slate-200 shadow-xl w-5/6">
             <div class="card-body">
               <div class="card-title">Welcom to your back</div>
               <form class="space-y-3 md:space-y-5">
-                <input
+                <BaseInpute
                   type="text"
-                  placeholder="Email or Phone"
-                  class="input input-bordered w-full"
+                  placeholder="Write Your Phone"
+                  v-model="userForm.name"
                 />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  class="input input-bordered w-full"
+                <BaseInpute
+                  type="password"
+                  placeholder="Write Your password"
+                  v-model="userForm.password"
                 />
                 <div class="flex flex-row">
                   <button class="btn btn-success" @click.prevent="login()">
@@ -55,11 +55,20 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import userApi from "../api/userApi";
+import BaseInpute from "../components/BaseInpute.vue";
 
 export default {
   name: "LoginView",
+  components: {
+    BaseInpute,
+  },
   data() {
-    return {};
+    return {
+      userForm: {
+        name: "",
+        password: "",
+      },
+    };
   },
   computed: {
     ...mapGetters({ userInfo: "getUser" }),
