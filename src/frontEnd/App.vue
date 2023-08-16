@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// import In from "./testComponents/In.vue";
 // import BaseInpute from "./components/BaseInpute.vue";
 // import BaseInpute1 from "./testComponents/BaseInpute1.vue";
 export default {

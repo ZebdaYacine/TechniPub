@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { singup, getAllUsers, login } = require("../controller/userController");
+const {
+  register,
+  getAllUsers,
+  login,
+} = require("../controller/userController");
 
-router.post("/", singup);
+router.post("/register", register);
 router.get("/list", getAllUsers);
 router.post("/login", login);
 

@@ -4,11 +4,20 @@ const localConfig = require("./utils/config");
 const app = new express();
 const userRouter = require("./router/userRoute");
 const middleware = require("./middleware/ErrorMidleware");
+const cors = require("cors");
+
+const corsOptions = {
+  origin: localConfig.FRONTEND,
+  optionsSuccessStatus: 200,
+};
+app.use(cors());
 
 app.use(express.json());
-app.use(middleware);
 
 app.use("/api/users", userRouter);
+
+app.use(middleware);
+
 mongoose.set("strictQuery", false);
 mongoose
   .connect(localConfig.MONGO_URL)

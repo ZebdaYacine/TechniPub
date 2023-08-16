@@ -19,7 +19,7 @@
       </div>
       <div class="basis-1/2 w-full">
         <div class="grid gap-4 place-items-center h-56 py-5">
-          <div class="card bg-slate-200 shadow-xl w-5/6">
+          <div class="card shadow-xl w-5/6" style="background-color: #e2dff5">
             <div class="card-body">
               <div class="card-title">Welcom to your back</div>
               <form class="space-y-3 md:space-y-5">

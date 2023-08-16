@@ -1,14 +1,16 @@
 const user = require("../module/userModule");
 const asyncHandler = require("express-async-handler");
 
-const singup = asyncHandler(async (req, res) => {
+const register = asyncHandler(async (req, res) => {
   try {
-    console.log("Received SINGUP request  with body:", req.body);
+    console.log("Received REGISTER request  with body:", req.body);
     const userObj = await user.create(req.body);
-    res.status(200).json(userObj);
+    res
+      .status(200)
+      .json({ data: userObj, message: "account created successfully" });
   } catch (error) {
     res.status(500);
-    throw new Error({ message: error.message });
+    throw new Error(error);
   }
 });
 
@@ -31,7 +33,7 @@ const login = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     res.status(code);
-    throw new Error({ message: error.message });
+    throw new Error(error);
   }
 });
 
@@ -42,8 +44,8 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.status(200).json(userObj);
   } catch (error) {
     res.status(500);
-    throw new Error({ message: error.message });
+    throw new Error(error);
   }
 });
 
-module.exports = { singup, getAllUsers, login };
+module.exports = { register, getAllUsers, login };

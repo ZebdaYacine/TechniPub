@@ -1,19 +1,15 @@
+// example-vue-component.vue
 <template>
-  <BaseInpute1 type="text" v-model="User.message" relus="phone" />
-  {{ User.message }}
+  <button @click="showAlert">Hello world</button>
 </template>
 
 <script>
-import BaseInpute1 from "./BaseInpute1.vue";
-
 export default {
-  components: { BaseInpute1 },
-  data() {
-    return {
-      User: {
-        message: "",
-      },
-    };
+  methods: {
+    showAlert() {
+      // Use sweetalert2
+      this.$swal("Hello Vue world!!!");
+    },
   },
 };
 </script>

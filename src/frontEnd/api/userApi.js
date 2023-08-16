@@ -1,3 +1,4 @@
+import api from "../utils/config";
 const userApi = {
   getUser() {
     return {
@@ -6,6 +7,14 @@ const userApi = {
       isLogged: false,
       privilage: 111,
     };
+  },
+  async register(user) {
+    try {
+      const result = await api.post("/users/register", user);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
   },
 };
 

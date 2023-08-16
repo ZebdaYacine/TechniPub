@@ -1,9 +1,9 @@
 const errorMiddleware = (err, req, res, next) => {
-  console.log("here is an error middleware");
+  console.error("here is an error middleware" + err.message);
   const statusCode = res.statusCode ? res.statusCode : 500;
   res.status(statusCode);
   res.json({
-    message: err,
+    message: err.message,
     stack: process.env.NODE_ENV === "development" ? err.stack : null,
   });
 };
