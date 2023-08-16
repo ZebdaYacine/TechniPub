@@ -59,7 +59,7 @@ export default {
       this.isVisited = true;
     },
     checking(v1, v2) {
-      if (this.relus === "") {
+      if (this.relus !== "") {
         const str = validators.target.get(v1).check(v2);
         if (str === true) {
           this.isError = false;
