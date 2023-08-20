@@ -80,14 +80,6 @@ export default {
   components: {
     BaseInpute,
   },
-  data() {
-    return {
-      userForm: {
-        phone: "",
-        password: "",
-      },
-    };
-  },
   methods: {
     login() {
       this.setUser(userApi.getUser());

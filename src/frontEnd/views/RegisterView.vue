@@ -78,11 +78,6 @@ export default {
   },
   data() {
     return {
-      userForm: {
-        phone: "",
-        password: "",
-        passwordC: "",
-      },
       dataRecived: false,
       shwoPrograssBar: false,
       goToAccount: false,

@@ -3,7 +3,13 @@ import validators from "../plugins/validators";
 
 const userMixins = {
   data() {
-    return {};
+    return {
+      userForm: {
+        phone: "",
+        password: "",
+        passwordC: "",
+      },
+    };
   },
   methods: {
     ...mapActions("userMod", { setUser: "setUserAction" }),
@@ -27,6 +33,9 @@ const userMixins = {
       isLogged: false,
       privilage: "",
     });
+    this.setPasswordCStatus(false);
+    this.setPasswordStatus(false);
+    this.setPhoneStatus(false);
     //console.log(this.userInfo);
   },
   watch: {
@@ -42,9 +51,7 @@ const userMixins = {
     },
     "userForm.passwordC": function (newValue) {
       this.setPasswordCStatus(
-        newValue === this.userForm.Initialpassword
-          ? true
-          : "password don't matche"
+        newValue === this.userForm.password ? true : "password don't matche"
       );
     },
   },
