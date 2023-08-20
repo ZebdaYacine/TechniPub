@@ -5,7 +5,13 @@ const userSchema = mongoose.Schema(
     phone: {
       type: String,
     },
+    name: {
+      type: String,
+    },
     password: {
+      type: String,
+    },
+    privilage: {
       type: String,
     },
   },

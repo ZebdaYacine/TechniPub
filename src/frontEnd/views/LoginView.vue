@@ -71,20 +71,20 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ userInfo: "getUser" }),
+    ...mapGetters("userMod", { userInfo: "getUser" }),
   },
   mounted() {
-    // this.setUser({
-    //   name: "",
-    //   id: "",
-    //   isLogged: false,
-    //   privilage: "",
-    // });
-    console.log(this.userInfo);
+    this.setUser({
+      name: "",
+      id: "",
+      isLogged: false,
+      privilage: "",
+    });
+    //console.log(this.userInfo);
   },
   methods: {
-    ...mapActions({ setUser: "setUserAction" }),
-    ...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
+    ...mapActions("userMod", { setUser: "setUserAction" }),
+    ...mapActions("userMod", { setLoginStatus: "changeLoginStatusAction" }),
     login() {
       this.setUser(userApi.getUser());
       this.setLoginStatus(true);

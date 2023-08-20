@@ -88,19 +88,19 @@ export default {
       window.performance.navigation.type ===
       window.performance.navigation.TYPE_RELOAD
     ) {
-      this.$store.commit("setPassword", "");
+      this.$store.commit("userMod/setPassword", "");
     }
   },
   computed: {
     validateInput() {
       const data = this.modelValue;
       if (this.relus === "password") {
-        this.$store.commit("setPassword", data);
+        this.$store.commit("userMod/setPassword", data);
       } else if (this.relus === "passwordC") {
         const result = this.checking(this.relus, data);
-        console.log(result);
         if (result === "") {
-          if (this.$store.state.password === data) {
+          const a = this.$store.getters["userMod/getPassword"] === data;
+          if (a) {
             return "";
           } else {
             return "password do not match";
@@ -108,7 +108,8 @@ export default {
         }
         return result;
       }
-      return this.checking(this.relus, data);
+      const a = this.checking(this.relus, data);
+      return a;
     },
   },
 };

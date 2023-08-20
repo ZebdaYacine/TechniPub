@@ -38,9 +38,17 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
+    // ...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
+    ...mapActions("userMod", { setUser: "setUserAction" }),
+
     logoaut() {
-      this.setLoginStatus(false);
+      this.setUser({
+        name: "",
+        phone: "",
+        id: "",
+        isLogged: false,
+      });
+      // this.setLoginStatus(false);
       this.$router.push({ name: "Login" });
     },
   },

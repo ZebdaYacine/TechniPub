@@ -48,27 +48,23 @@ const router = createRouter({
 });
 
 router.beforeEach((from, next) => {
-  const user = store.state.user;
+  const user = store.getters["userMod/getUser"];
   console.log(from.path);
   if (!user.isLogged) {
-    console.log(0);
     if (
       from.path !== "/" &&
       from.path !== "/login" &&
       from.path !== "/Register"
     ) {
-      console.log(1);
       return "/";
     }
   } else {
-    console.log(2);
     if (
       from.path === "/" ||
       from.path === "/login" ||
       from.path === "/Register"
     ) {
-      console.log(3);
-      return "/Main/" + user.id + "?name=" + user.name;
+      return "/Main/" + user.id + "?name=" + user.phone;
     }
   }
 });

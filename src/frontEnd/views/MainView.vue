@@ -4,7 +4,7 @@
     <div class="lg:basis-3/12 md:basis-3/12">
       <SideBarComp
         :icon-url="profilsrc"
-        :user-name="user.name"
+        :user-name="user.phone"
         @loadView="loadCurrentView"
       />
     </div>
@@ -44,19 +44,18 @@ export default {
     return {
       profilsrc: profil,
       user: {
-        name: "",
+        phone: "",
       },
       lastTargetclicked: "",
       view: "",
     };
   },
   computed: {
-    ...mapGetters({ userInfo: "getUser" }),
+    ...mapGetters("userMod", { userInfo: "getUser" }),
   },
   mounted() {
     this.view = "HomeView";
-    console.log(this.userInfo);
-    this.user.name = this.userInfo.name;
+    this.user.phone = this.userInfo.phone;
   },
   methods: {
     loadCurrentView(data) {

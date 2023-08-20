@@ -4,11 +4,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  computed: {
+    ...mapGetters("a", { userInfo: "getUser" }),
+    ...mapGetters("a", { password: "getPassword" }),
+  },
   methods: {
     showAlert() {
-      // Use sweetalert2
-      this.$swal("Hello Vue world!!!");
+      console.log(this.userInfo);
     },
   },
 };

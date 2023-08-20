@@ -13,7 +13,7 @@ const userApi = {
       const result = await api.post("/users/register", user);
       return result;
     } catch (error) {
-      console.log(error.message);
+      return { data: "", status: 500, error: error.message };
     }
   },
 };

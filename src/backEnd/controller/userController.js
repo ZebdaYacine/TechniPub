@@ -7,7 +7,7 @@ const register = asyncHandler(async (req, res) => {
     const userObj = await user.create(req.body);
     res
       .status(200)
-      .json({ data: userObj, message: "account created successfully" });
+      .json({ object: userObj, message: "account created successfully" });
   } catch (error) {
     res.status(500);
     throw new Error(error);
@@ -26,7 +26,7 @@ const login = asyncHandler(async (req, res) => {
       throw new Error(`cannot find any user with this phone ${phone}`);
     }
     if (userJson.password === passwordSended) {
-      res.status(code).json({ data: userJson, message: "the current user" });
+      res.status(code).json({ object: userJson, message: "the current user" });
     } else {
       code = 404;
       throw new Error(`password incorrect`);
