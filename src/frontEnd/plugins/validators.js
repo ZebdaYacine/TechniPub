@@ -19,7 +19,6 @@ const Validators = {
     }
     return Error.lessThan8;
   },
-
   isInputValid(value, checkInput, name) {
     return value === "" ? "Empty Input" : checkInput(value, name);
   },

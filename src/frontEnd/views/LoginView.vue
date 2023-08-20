@@ -23,18 +23,34 @@
             <div class="card-body">
               <div class="card-title">Welcom to your back</div>
               <form class="space-y-3 md:space-y-5">
-                <BaseInpute
-                  type="text"
-                  placeholder="Write Your Phone"
-                  v-model="userForm.name"
-                />
-                <BaseInpute
-                  type="password"
-                  placeholder="Write Your password"
-                  v-model="userForm.password"
-                />
+                <div class="flex flex-col w-full">
+                  <BaseInpute
+                    type="text"
+                    placeholder="06 58 18 58 67"
+                    v-model="userForm.phone"
+                    relus="phone"
+                  />
+                  <p class="text-left text-red-700 text-1xl">
+                    {{ phoneStatus }}
+                  </p>
+                </div>
+                <div class="flex flex-col w-full">
+                  <BaseInpute
+                    type="password"
+                    placeholder="aAk$l@&+><.."
+                    v-model="userForm.password"
+                    relus="password"
+                  />
+                  <p class="text-left text-red-700 text-1xl">
+                    {{ passworsStatus }}
+                  </p>
+                </div>
                 <div class="flex flex-row">
-                  <button class="btn btn-success" @click.prevent="login()">
+                  <button
+                    class="btn btn-success"
+                    @click.prevent="login()"
+                    :disabled="!formLoginStatus"
+                  >
                     Login
                   </button>
                   <p class="flex justify-end btn btn-link">
@@ -53,38 +69,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 import userApi from "../api/userApi";
 import BaseInpute from "../components/BaseInpute.vue";
+import validators from "../plugins/validators";
+import userMixins from "../mixins/user";
 
 export default {
   name: "LoginView",
+  mixins: [userMixins],
   components: {
     BaseInpute,
   },
   data() {
     return {
       userForm: {
-        name: "",
+        phone: "",
         password: "",
       },
     };
   },
-  computed: {
-    ...mapGetters("userMod", { userInfo: "getUser" }),
-  },
-  mounted() {
-    this.setUser({
-      name: "",
-      id: "",
-      isLogged: false,
-      privilage: "",
-    });
-    //console.log(this.userInfo);
-  },
   methods: {
-    ...mapActions("userMod", { setUser: "setUserAction" }),
-    ...mapActions("userMod", { setLoginStatus: "changeLoginStatusAction" }),
     login() {
       this.setUser(userApi.getUser());
       this.setLoginStatus(true);

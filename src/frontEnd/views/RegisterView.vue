@@ -25,7 +25,7 @@
                 <BaseInpute
                   type="password"
                   placeholder="aAk$l@&+><.."
-                  v-model="userForm.Initialpassword"
+                  v-model="userForm.password"
                   relus="password"
                 />
                 <p class="text-left text-red-700 text-1xl">
@@ -36,7 +36,7 @@
                 <BaseInpute
                   type="password"
                   placeholder="Like the last password"
-                  v-model="userForm.ConfirmPassword"
+                  v-model="userForm.passwordC"
                   relus="passwordC"
                 />
                 <p class="text-left text-red-700 text-1xl">
@@ -67,13 +67,12 @@
 //import UserStore from "../firebase/userStore";
 import BaseInpute from "../components/BaseInpute.vue";
 import userApi from "../api/userApi";
-//import axios from "axios";
 import Swal from "sweetalert2";
-import { mapGetters, mapActions } from "vuex";
-import validators from "../plugins/validators";
+import userMixins from "../mixins/user";
 
 export default {
   name: "RegisterView",
+  mixins: [userMixins],
   components: {
     BaseInpute,
   },
@@ -81,59 +80,15 @@ export default {
     return {
       userForm: {
         phone: "",
-        Initialpassword: "",
-        ConfirmPassword: "",
+        password: "",
+        passwordC: "",
       },
       dataRecived: false,
       shwoPrograssBar: false,
       goToAccount: false,
     };
   },
-
-  watch: {
-    "userForm.phone": function (newValue) {
-      const result = validators.target.get("phone").check(newValue);
-      this.setPhoneStatus(result);
-      this.initClass = "fnkfdgn";
-      console.log(this.initClass);
-    },
-    "userForm.Initialpassword": function (newValue) {
-      const result = validators.target.get("password").check(newValue);
-      this.setPasswordStatus(result);
-    },
-    "userForm.ConfirmPassword": function (newValue) {
-      this.setPasswordCStatus(
-        newValue === this.userForm.Initialpassword
-          ? ""
-          : "password don't matche"
-      );
-    },
-  },
-  mounted() {
-    if (
-      window.performance.navigation.type ===
-      window.performance.navigation.TYPE_RELOAD
-    ) {
-      this.setUser({
-        name: "",
-        phone: "",
-        id: "",
-        isLogged: false,
-      });
-    }
-  },
-  computed: {
-    ...mapGetters("userMod", { userInfor: "getUser" }),
-    ...mapGetters("formMod", { formstatus: "getForm" }),
-    ...mapGetters("formMod", { phoneStatus: "getPhoneStatus" }),
-    ...mapGetters("formMod", { passworsStatus: "getPasswordStatus" }),
-    ...mapGetters("formMod", { passworsCstatus: "getPasswordCStatus" }),
-  },
   methods: {
-    ...mapActions("userMod", { setUser: "setUserAction" }),
-    ...mapActions("formMod", { setPhoneStatus: "phoneStatuesAction" }),
-    ...mapActions("formMod", { setPasswordStatus: "passwordStatuesAction" }),
-    ...mapActions("formMod", { setPasswordCStatus: "passwordCStatuesAction" }),
     //...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
     async register() {
       //console.log(UserStore.createUser(this.userForm));

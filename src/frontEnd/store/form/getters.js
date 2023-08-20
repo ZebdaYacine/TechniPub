@@ -4,8 +4,14 @@ const formGetters = {
       state.phoneInputStatues &&
       state.passwordInputStatus &&
       state.passwordCInputStatus;
-    return a === "";
+    return a === true ? a : false;
   },
+
+  getFormLoginStatus(state) {
+    const a = state.phoneInputStatues && state.passwordInputStatus;
+    return a === true ? a : false;
+  },
+
   getPhoneStatus(state) {
     return typeof state.phoneInputStatues === "boolean"
       ? ""
