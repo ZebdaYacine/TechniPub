@@ -6,6 +6,11 @@ const formGetters = {
       state.passwordCInputStatus
     );
   },
+  getPhoneStatus(state) {
+    return typeof state.phoneInputStatues === "boolean"
+      ? ""
+      : state.phoneInputStatues;
+  },
 };
 
 export default formGetters;

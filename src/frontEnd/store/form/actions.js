@@ -1,13 +1,7 @@
-const userActions = {
-  changeLoginStatusAction(context, payload) {
-    context.commit("changeLoginStatus", payload);
-  },
-  setUserAction(context, payload) {
-    context.commit("setUser", payload);
-  },
-  setPasswordAction(context, payload) {
-    context.commit("setPassword", payload);
+const formActions = {
+  phoneStatuesAction(context, payload) {
+    context.commit("setPhoneInputStatues", payload);
   },
 };
 
-export default userActions;
+export default formActions;

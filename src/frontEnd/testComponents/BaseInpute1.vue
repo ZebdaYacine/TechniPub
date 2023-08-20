@@ -59,13 +59,15 @@ export default {
       this.isVisited = true;
     },
     checking(v1, v2) {
-      const str = validators.target.get(v1).check(v2);
-      if (str === true) {
-        this.isError = false;
-        return "";
-      } else {
-        this.isError = true;
-        return str;
+      if (this.relus !== "") {
+        const str = validators.target.get(v1).check(v2);
+        if (str === true) {
+          this.isError = false;
+          return "";
+        } else {
+          this.isError = true;
+          return str;
+        }
       }
     },
     toggleVisibility() {
@@ -81,17 +83,24 @@ export default {
       }
     },
   },
-
+  mounted() {
+    if (
+      window.performance.navigation.type ===
+      window.performance.navigation.TYPE_RELOAD
+    ) {
+      this.$store.commit("userMod/setPassword", "");
+    }
+  },
   computed: {
     validateInput() {
       const data = this.modelValue;
       if (this.relus === "password") {
-        this.$store.commit("setPassword", data);
+        this.$store.commit("userMod/setPassword", data);
       } else if (this.relus === "passwordC") {
         const result = this.checking(this.relus, data);
-        console.log(result);
         if (result === "") {
-          if (this.$store.state.password === data) {
+          const a = this.$store.getters["userMod/getPassword"] === data;
+          if (a) {
             return "";
           } else {
             return "password do not match";
@@ -99,7 +108,8 @@ export default {
         }
         return result;
       }
-      return this.checking(this.relus, data);
+      const a = this.checking(this.relus, data);
+      return a;
     },
   },
 };

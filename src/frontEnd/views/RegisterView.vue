@@ -10,12 +10,18 @@
             />
             <div class="card-title">Cree votre compt</div>
             <form class="space-y-3 md:space-y-5">
-              <BaseInpute
-                type="text"
-                placeholder="06 58 18 58 67"
-                v-model="userForm.phone"
-                relus="phone"
-              />
+              <div class="flex flex-col w-full">
+                <BaseInpute
+                  type="text"
+                  placeholder="06 58 18 58 67"
+                  v-model="userForm.phone"
+                  relus="phone"
+                  :error="isError"
+                />
+                <p class="text-left text-red-700 text-1xl">
+                  {{ phoneStatus }}
+                </p>
+              </div>
               <BaseInpute
                 type="password"
                 placeholder="aAk$l@&+><.."
@@ -51,6 +57,7 @@ import userApi from "../api/userApi";
 //import axios from "axios";
 import Swal from "sweetalert2";
 import { mapGetters, mapActions } from "vuex";
+import validators from "../plugins/validators";
 
 export default {
   name: "RegisterView",
@@ -67,7 +74,14 @@ export default {
       dataRecived: false,
       shwoPrograssBar: false,
       goToAccount: false,
+      isError: true,
     };
+  },
+  watch: {
+    "userForm.phone": function (newValue) {
+      const result = validators.target.get("phone").check(newValue);
+      this.setPhoneStatus(result);
+    },
   },
   mounted() {
     if (
@@ -85,9 +99,11 @@ export default {
   computed: {
     ...mapGetters("userMod", { userInfor: "getUser" }),
     ...mapGetters("formMod", { formstatus: "getForm" }),
+    ...mapGetters("formMod", { phoneStatus: "getPhoneStatus" }),
   },
   methods: {
     ...mapActions("userMod", { setUser: "setUserAction" }),
+    ...mapActions("formMod", { setPhoneStatus: "phoneStatuesAction" }),
     //...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
     async register() {
       //console.log(UserStore.createUser(this.userForm));
