@@ -1,15 +1,25 @@
 const formGetters = {
   getForm(state) {
-    return (
+    const a =
       state.phoneInputStatues &&
       state.passwordInputStatus &&
-      state.passwordCInputStatus
-    );
+      state.passwordCInputStatus;
+    return a === "";
   },
   getPhoneStatus(state) {
     return typeof state.phoneInputStatues === "boolean"
       ? ""
       : state.phoneInputStatues;
+  },
+  getPasswordStatus(state) {
+    return typeof state.passwordInputStatus === "boolean"
+      ? ""
+      : state.passwordInputStatus;
+  },
+  getPasswordCStatus(state) {
+    return typeof state.passwordCInputStatus === "boolean"
+      ? ""
+      : state.passwordCInputStatus;
   },
 };
 

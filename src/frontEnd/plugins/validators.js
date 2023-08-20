@@ -63,19 +63,6 @@ const Validators = {
         },
       },
     ],
-    [
-      "passwordC",
-      {
-        counter: 8,
-        check(value) {
-          return Validators.isInputValid(
-            value,
-            Validators.isPassWordValide,
-            "password"
-          );
-        },
-      },
-    ],
   ]),
   ErrorMessage: new Map([
     ["email", { msg: "Email Invalide" }],

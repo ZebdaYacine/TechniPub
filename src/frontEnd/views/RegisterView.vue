@@ -16,26 +16,39 @@
                   placeholder="06 58 18 58 67"
                   v-model="userForm.phone"
                   relus="phone"
-                  :error="isError"
                 />
                 <p class="text-left text-red-700 text-1xl">
                   {{ phoneStatus }}
                 </p>
               </div>
-              <BaseInpute
-                type="password"
-                placeholder="aAk$l@&+><.."
-                v-model="userForm.Initialpassword"
-                relus="password"
-              />
-              <BaseInpute
-                type="password"
-                placeholder="Like the last password"
-                v-model="userForm.ConfirmPassword"
-                relus="passwordC"
-              />
+              <div class="flex flex-col w-full">
+                <BaseInpute
+                  type="password"
+                  placeholder="aAk$l@&+><.."
+                  v-model="userForm.Initialpassword"
+                  relus="password"
+                />
+                <p class="text-left text-red-700 text-1xl">
+                  {{ passworsStatus }}
+                </p>
+              </div>
+              <div class="flex flex-col w-full">
+                <BaseInpute
+                  type="password"
+                  placeholder="Like the last password"
+                  v-model="userForm.ConfirmPassword"
+                  relus="passwordC"
+                />
+                <p class="text-left text-red-700 text-1xl">
+                  {{ passworsCstatus }}
+                </p>
+              </div>
               <div class="flex flex-row">
-                <button class="btn btn-success" @click.prevent="register()">
+                <button
+                  class="btn btn-success"
+                  @click.prevent="register()"
+                  :disabled="!formstatus"
+                >
                   Cree
                 </button>
                 <p class="flex justify-end btn btn-link">
@@ -74,13 +87,26 @@ export default {
       dataRecived: false,
       shwoPrograssBar: false,
       goToAccount: false,
-      isError: true,
     };
   },
+
   watch: {
     "userForm.phone": function (newValue) {
       const result = validators.target.get("phone").check(newValue);
       this.setPhoneStatus(result);
+      this.initClass = "fnkfdgn";
+      console.log(this.initClass);
+    },
+    "userForm.Initialpassword": function (newValue) {
+      const result = validators.target.get("password").check(newValue);
+      this.setPasswordStatus(result);
+    },
+    "userForm.ConfirmPassword": function (newValue) {
+      this.setPasswordCStatus(
+        newValue === this.userForm.Initialpassword
+          ? ""
+          : "password don't matche"
+      );
     },
   },
   mounted() {
@@ -100,10 +126,14 @@ export default {
     ...mapGetters("userMod", { userInfor: "getUser" }),
     ...mapGetters("formMod", { formstatus: "getForm" }),
     ...mapGetters("formMod", { phoneStatus: "getPhoneStatus" }),
+    ...mapGetters("formMod", { passworsStatus: "getPasswordStatus" }),
+    ...mapGetters("formMod", { passworsCstatus: "getPasswordCStatus" }),
   },
   methods: {
     ...mapActions("userMod", { setUser: "setUserAction" }),
     ...mapActions("formMod", { setPhoneStatus: "phoneStatuesAction" }),
+    ...mapActions("formMod", { setPasswordStatus: "passwordStatuesAction" }),
+    ...mapActions("formMod", { setPasswordCStatus: "passwordCStatuesAction" }),
     //...mapActions({ setLoginStatus: "changeLoginStatusAction" }),
     async register() {
       //console.log(UserStore.createUser(this.userForm));

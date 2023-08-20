@@ -5,13 +5,8 @@
       :type="typeInput"
       :value="modelValue"
       :placeholder="placeholder"
-      :error="isError"
-      :class="{
-        'input w-full': !isError,
-        'input w-full input-error': isError,
-      }"
+      class="input w-full"
       @input="$emit('update:modelValue', $event.target.value)"
-      @click="setVisited()"
     />
     <button
       type="button"
@@ -30,21 +25,17 @@ export default {
     placeholder: String,
     relus: String,
     modelValue: String,
-    isError: Boolean,
+    error: Boolean,
   },
   emits: ["update:modelValue"],
   data() {
     return {
-      isVisited: false,
-      class: "input w-full",
       typeInput: this.type,
       icon: "fas fa-eye-slash",
     };
   },
+
   methods: {
-    setVisited() {
-      this.isVisited = true;
-    },
     set() {
       switch (this.typeInput) {
         case "password": {
@@ -58,7 +49,6 @@ export default {
           break;
         }
       }
-      console.log(this.icon);
     },
   },
   mounted() {
