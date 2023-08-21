@@ -90,7 +90,7 @@ export default {
       this.shwoPrograssBar = true;
       const result = await userApi.register({
         phone: this.userForm.phone,
-        password: this.userForm.Initialpassword,
+        password: this.userForm.password,
       });
       switch (result.statusText) {
         case "OK": {
@@ -107,7 +107,7 @@ export default {
           Swal.fire({
             icon: "error",
             title: "Error",
-            text: "Something went wrong!",
+            text: result.error,
           });
           break;
         }

@@ -71,7 +71,6 @@
 <script>
 import userApi from "../api/userApi";
 import BaseInpute from "../components/BaseInpute.vue";
-import validators from "../plugins/validators";
 import userMixins from "../mixins/user";
 
 export default {
@@ -82,13 +81,19 @@ export default {
   },
   methods: {
     login() {
-      this.setUser(userApi.getUser());
-      this.setLoginStatus(true);
-      this.$router.push({
-        name: "Main",
-        params: { id: this.userInfo.id },
-        query: { name: this.userInfo.name },
+      const result = userApi.login({
+        phone: this.userForm.phone,
+        password: this.userForm.password,
       });
+      console.log(result.statusText);
+      // console.log(user);
+      // this.setUser(user);
+      // this.setLoginStatus(true);
+      // this.$router.push({
+      //   name: "Main",
+      //   params: { id: this.userInfo.id },
+      //   query: { name: this.userInfo.name },
+      // });
     },
   },
 };

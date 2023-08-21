@@ -5,6 +5,7 @@ const localConfig = {
   HOST: process.env.HOST,
   MONGO_URL: process.env.MONGO_URL,
   FRONTEND: process.env.FRONTEND,
+  SALT: process.env.SALT,
 };
 
 module.exports = localConfig;

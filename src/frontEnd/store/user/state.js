@@ -5,6 +5,7 @@ const UserStoreState = {
     id: "",
     isLogged: false,
     privilage: "",
+    token: "",
   },
   password: "",
 };

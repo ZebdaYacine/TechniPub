@@ -30,5 +30,7 @@ mongoose
     });
   })
   .catch((error) => {
-    console.error("no connection");
+    console.log("database connection failed. exiting now...");
+    console.error(error);
+    process.exit(1);
   });

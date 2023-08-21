@@ -4,9 +4,11 @@ const userSchema = mongoose.Schema(
   {
     phone: {
       type: String,
+      unique: true,
     },
     name: {
       type: String,
+      default: null,
     },
     password: {
       type: String,
@@ -14,6 +16,7 @@ const userSchema = mongoose.Schema(
     privilage: {
       type: String,
     },
+    token: { type: String },
   },
   {
     timestamps: true,
