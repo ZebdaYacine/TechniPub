@@ -43,7 +43,6 @@ const userMixins = {
       const result = validators.target.get("phone").check(newValue);
       this.setPhoneStatus(result);
       this.initClass = "fnkfdgn";
-      console.log(this.initClass);
     },
     "userForm.password": function (newValue) {
       const result = validators.target.get("password").check(newValue);

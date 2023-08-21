@@ -92,6 +92,7 @@ export default {
         phone: this.userForm.phone,
         password: this.userForm.password,
       });
+      console.log(result);
       switch (result.statusText) {
         case "OK": {
           Swal.fire({

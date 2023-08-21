@@ -7,12 +7,10 @@ const register = asyncHandler(async (req, res) => {
     console.log("Received REGISTER request  with body:", req.body);
     const data = await userModule.registerMapping(req.body);
     const userObj = await user.create(data);
-    res
-      .status(200)
-      .json({
-        object: userModule.registerResponse(userJson),
-        message: "account created successfully",
-      });
+    res.status(200).json({
+      object: userModule.registerResponse(userObj),
+      message: "account created successfully",
+    });
   } catch (error) {
     res.status(500);
     throw new Error(error);
@@ -24,16 +22,16 @@ const login = asyncHandler(async (req, res) => {
   try {
     console.log("Received LOGIN request with body:", req.body);
     const data = await userModule.loginMapping(req.body);
-    const userJson = await user.findOne({ phone: data.phone });
+    const userObj = await user.findOne({ phone: data.phone });
 
-    if (!userJson) {
+    if (!userObj) {
       code = 404;
       throw new Error(`cannot find any user with this phone ${phone}`);
     }
-    if (userJson.password === data.password) {
-      console.log(userJson);
+
+    if (userObj.password === data.password) {
       res.status(code).json({
-        object: userModule.loginResponse(userJson),
+        object: userModule.loginResponse(userObj),
         message: "the current user",
       });
     } else {

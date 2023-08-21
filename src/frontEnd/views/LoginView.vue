@@ -80,20 +80,19 @@ export default {
     BaseInpute,
   },
   methods: {
-    login() {
-      const result = userApi.login({
+    async login() {
+      const result = await userApi.login({
         phone: this.userForm.phone,
         password: this.userForm.password,
       });
-      console.log(result.statusText);
-      // console.log(user);
-      // this.setUser(user);
-      // this.setLoginStatus(true);
-      // this.$router.push({
-      //   name: "Main",
-      //   params: { id: this.userInfo.id },
-      //   query: { name: this.userInfo.name },
-      // });
+      this.setUser(result.data.object);
+      console.log(this.userInfo);
+      this.setLoginStatus(true);
+      this.$router.push({
+        name: "Main",
+        params: { id: this.userInfo.id },
+        query: { name: this.userInfo.name },
+      });
     },
   },
 };
