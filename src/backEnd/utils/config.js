@@ -6,6 +6,7 @@ const localConfig = {
   MONGO_URL: process.env.MONGO_URL,
   FRONTEND: process.env.FRONTEND,
   SALT: process.env.SALT,
+  KEY: process.env.ACCES_TOKEN_KEY,
 };
 
 module.exports = localConfig;

@@ -5,7 +5,7 @@ import PurchasesView from "../views/PurchasesView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import store from "../store";
+import store from "../store/index";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -49,7 +49,6 @@ const router = createRouter({
 
 router.beforeEach((from, next) => {
   const user = store.getters["userMod/getUser"];
-  console.log(from.path);
   if (!user.isLogged) {
     if (
       from.path !== "/" &&

@@ -1,16 +1,32 @@
 const user = require("../module/userModule");
 const asyncHandler = require("express-async-handler");
 const userModule = require("../mappers/userMapper");
-const bcrypt = require("bcrypt");
+const localConfig = require("../utils/config");
+const jwt = require("jsonwebtoken");
+
+function createToken(user) {
+  const token = jwt.sign({ userId: user.id }, localConfig.KEY, {
+    expiresIn: "1h",
+  });
+  return token;
+}
 const register = asyncHandler(async (req, res) => {
   try {
     console.log("Received REGISTER request  with body:", req.body);
     const data = await userModule.registerMapping(req.body);
     const userObj = await user.create(data);
-    res.status(200).json({
-      object: userModule.registerResponse(userObj),
-      message: "account created successfully",
-    });
+    if (userObj) {
+      userObj.token = createToken(userObj);
+      res.status(200).json({
+        object: userModule.registerResponse(userObj),
+        message: "account created successfully",
+      });
+    } else {
+      res.status(500).json({
+        object: "",
+        message: "Phone number Already used",
+      });
+    }
   } catch (error) {
     res.status(500);
     throw new Error(error);
@@ -18,28 +34,29 @@ const register = asyncHandler(async (req, res) => {
 });
 
 const login = asyncHandler(async (req, res) => {
-  let code = 200;
   try {
     console.log("Received LOGIN request with body:", req.body);
     const data = await userModule.loginMapping(req.body);
     const userObj = await user.findOne({ phone: data.phone });
-
     if (!userObj) {
-      code = 404;
-      throw new Error(`cannot find any user with this phone ${phone}`);
-    }
-
-    if (userObj.password === data.password) {
-      res.status(code).json({
+      res.status(404).json({
+        object: "",
+        message: "user not found",
+      });
+    } else if (userObj.password === data.password) {
+      userObj.token = createToken(userObj);
+      res.status(200).json({
         object: userModule.loginResponse(userObj),
         message: "the current user",
       });
     } else {
-      code = 404;
-      throw new Error(`password incorrect`);
+      res.status(500).json({
+        object: "",
+        message: "password incorrect",
+      });
     }
   } catch (error) {
-    res.status(code);
+    res.status(500);
     throw new Error(error);
   }
 });

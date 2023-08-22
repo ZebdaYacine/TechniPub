@@ -5,6 +5,7 @@ const app = new express();
 const userRouter = require("./router/userRoute");
 const middleware = require("./middleware/ErrorMidleware");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const corsOptions = {
   origin: localConfig.FRONTEND,
@@ -16,7 +17,7 @@ app.use(express.json());
 
 app.use("/api/users", userRouter);
 
-app.use(middleware);
+//app.use(middleware);
 
 mongoose.set("strictQuery", false);
 mongoose

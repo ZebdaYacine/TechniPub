@@ -118,14 +118,20 @@ export default {
       if (this.goToAccount) {
         this.goToYourAccount(result.data.object);
       }
-      console.log(this.userInfor);
+      console.log(this.userInfo);
     },
     goToYourAccount(data) {
-      this.setUser({ name: "", phone: data.phone, isLogged: true });
-      //this.setLoginStatus(true);
+      console.log(data);
+      this.setUser({
+        id: data.id,
+        name: "",
+        phone: data.phone,
+        isLogged: true,
+        token: data.token,
+      });
       this.$router.push({
         name: "Main",
-        params: { id: data._id },
+        params: { id: data.id },
         query: { phone: data.phone },
       });
     },

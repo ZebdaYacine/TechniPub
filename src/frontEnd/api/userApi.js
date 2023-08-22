@@ -1,28 +1,29 @@
 import api from "../utils/config";
 const userApi = {
-  // getUser() {
-  //   return {
-  //     name: "Zebda Yacine",
-  //     id: 1,
-  //     isLogged: false,
-  //     privilage: 111,
-  //   };
-  // },
+  async getApi(url, user) {
+    let resulet = "";
+    await api
+      .post(url, user)
+      .then((response) => {
+        resulet = {
+          statusText: response.statusText,
+          data: response.data,
+        };
+      })
+      .catch((error) => {
+        resulet = {
+          statusText: error.code,
+          error: error.response.data.message,
+        };
+      });
+    return resulet;
+  },
+
   async register(user) {
-    try {
-      const result = await api.post("/users/register", user);
-      return result;
-    } catch (error) {
-      return { data: "", status: 500, error: error.message };
-    }
+    return await this.getApi("/users/register", user);
   },
   async login(user) {
-    try {
-      const result = await api.post("/users/login", user);
-      return result;
-    } catch (error) {
-      return { data: "", status: 500, error: error.message };
-    }
+    return await this.getApi("/users/login", user);
   },
 };
 

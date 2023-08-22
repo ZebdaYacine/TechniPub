@@ -21,6 +21,10 @@
         <div class="grid gap-4 place-items-center h-56 py-5">
           <div class="card shadow-xl w-5/6" style="background-color: #e2dff5">
             <div class="card-body">
+              <progress
+                class="progress progress-primary"
+                v-if="shwoPrograssBar"
+              />
               <div class="card-title">Welcom to your back</div>
               <form class="space-y-3 md:space-y-5">
                 <div class="flex flex-col w-full">
@@ -72,6 +76,7 @@
 import userApi from "../api/userApi";
 import BaseInpute from "../components/BaseInpute.vue";
 import userMixins from "../mixins/user";
+import Swal from "sweetalert2";
 
 export default {
   name: "LoginView",
@@ -79,19 +84,54 @@ export default {
   components: {
     BaseInpute,
   },
+  data() {
+    return {
+      dataRecived: false,
+      shwoPrograssBar: false,
+      goToAccount: false,
+    };
+  },
   methods: {
     async login() {
+      this.shwoPrograssBar = true;
       const result = await userApi.login({
         phone: this.userForm.phone,
         password: this.userForm.password,
       });
-      this.setUser(result.data.object);
+      console.log(result);
+      switch (result.statusText) {
+        case "OK": {
+          this.goToAccount = true;
+          break;
+        }
+        default: {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: result.error,
+          });
+          break;
+        }
+      }
+      this.dataRecived = true;
+      this.shwoPrograssBar = false;
+      if (this.goToAccount) {
+        this.goToYourAccount(result.data.object);
+      }
       console.log(this.userInfo);
-      this.setLoginStatus(true);
+    },
+    goToYourAccount(data) {
+      this.setUser({
+        id: data.id,
+        name: "",
+        phone: data.phone,
+        isLogged: true,
+        token: data.token,
+      });
       this.$router.push({
         name: "Main",
-        params: { id: this.userInfo.id },
-        query: { name: this.userInfo.name },
+        params: { id: data.id },
+        query: { phone: data.phone },
       });
     },
   },
