@@ -17,6 +17,11 @@ const register = asyncHandler(async (req, res) => {
     const userObj = await user.create(data);
     if (userObj) {
       userObj.token = createToken(userObj);
+      const userObje1 = await user.updateOne(
+        { phone: data.phone },
+        { $set: { token: userObj.token } }
+      );
+      console.log(userObje1);
       res.status(200).json({
         object: userModule.registerResponse(userObj),
         message: "account created successfully",
@@ -45,6 +50,11 @@ const login = asyncHandler(async (req, res) => {
       });
     } else if (userObj.password === data.password) {
       userObj.token = createToken(userObj);
+      const userObje1 = await user.updateOne(
+        { phone: data.phone },
+        { $set: { token: userObj.token } }
+      );
+      console.log(userObje1);
       res.status(200).json({
         object: userModule.loginResponse(userObj),
         message: "the current user",
