@@ -1,7 +1,5 @@
 <template>
-  <div class="lg:basis-10/12">
-    <p class="text-center text-5xl">Statistique Page</p>
-  </div>
+  <p class="text-center text-5xl">Home Page</p>
 </template>
 
 <script>

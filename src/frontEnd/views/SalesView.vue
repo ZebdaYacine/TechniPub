@@ -1,7 +1,5 @@
 <template>
-  <div class="lg:basis-10/12">
-    <p class="text-center text-5xl">Sales Page</p>
-  </div>
+  <p class="text-center text-5xl">Sales Page</p>
 </template>
 
 <script>

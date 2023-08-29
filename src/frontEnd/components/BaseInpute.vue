@@ -5,7 +5,7 @@
       :type="typeInput"
       :value="modelValue"
       :placeholder="placeholder"
-      class="input w-full"
+      class="input input-primary border-blue-50 w-full"
       @input="$emit('update:modelValue', $event.target.value)"
     />
     <button
